@@ -29,4 +29,13 @@ public class Post extends BaseEntity {
         this.content = content;
         this.user = user;
     }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public boolean isNotWrittenBy(User user) {
+        return this.user != user;
+    }
 }

@@ -3,6 +3,7 @@ package com.wanted.wantedpreonboardingbackend.post;
 import com.wanted.wantedpreonboardingbackend.common.LoginCheck;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostCreateRequest;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostResponse;
+import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostUpdateRequest;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostsResponse;
 import com.wanted.wantedpreonboardingbackend.user.domain.Email;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +44,16 @@ public class PostController {
         PostResponse postResponse = postService.getPost(postId);
 
         return ResponseEntity.ok(postResponse);
+    }
+
+    @PutMapping("/{postId}")
+    public ResponseEntity<Void> updatePost(
+            @PathVariable Long postId,
+            @RequestBody PostUpdateRequest postUpdateRequest,
+            @LoginCheck Email email
+    ) {
+        postService.updatePost(email, postId, postUpdateRequest.title(), postUpdateRequest.content());
+
+        return ResponseEntity.noContent().build();
     }
 }

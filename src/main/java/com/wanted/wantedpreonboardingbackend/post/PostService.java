@@ -38,14 +38,33 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public PostResponse getPost(Long postId) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        Post post = getPostOrException(postId);
 
         return PostResponse.of(post);
+    }
+
+    @Transactional
+    public void updatePost(Email email, Long postId, String title, String content) {
+        Post post = getPostOrException(postId);
+        User user = getUserOrException(email);
+        validatePostAccessAuthority(post, user);
+
+        post.update(title, content);
     }
 
     private User getUserOrException(Email email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+    }
+
+    private Post getPostOrException(Long postId) {
+        return postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+    }
+
+    private void validatePostAccessAuthority(Post post, User user) {
+        if (post.isNotWrittenBy(user)) {
+            throw new IllegalArgumentException("게시글 접근 권한이 없는 사용자입니다.");
+        }
     }
 }

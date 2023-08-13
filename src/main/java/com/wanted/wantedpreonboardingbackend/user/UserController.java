@@ -1,5 +1,6 @@
 package com.wanted.wantedpreonboardingbackend.user;
 
+import com.wanted.wantedpreonboardingbackend.user.domain.dto.LoginRequest;
 import com.wanted.wantedpreonboardingbackend.user.domain.dto.UserCreateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,12 @@ public class UserController {
         return ResponseEntity.created(
                 URI.create("/users/" + savedUserId)
         ).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest loginRequest) {
+        String token = userService.login(loginRequest.email(), loginRequest.password());
+
+        return ResponseEntity.ok(token);
     }
 }

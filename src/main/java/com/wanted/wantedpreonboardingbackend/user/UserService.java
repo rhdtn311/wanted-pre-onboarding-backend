@@ -1,7 +1,7 @@
 package com.wanted.wantedpreonboardingbackend.user;
 
 import com.wanted.wantedpreonboardingbackend.common.PasswordEncoder;
-import com.wanted.wantedpreonboardingbackend.jwt.JwtTokenProvider;
+import com.wanted.wantedpreonboardingbackend.jwt.JwtTokenManager;
 import com.wanted.wantedpreonboardingbackend.user.domain.Email;
 import com.wanted.wantedpreonboardingbackend.user.domain.Password;
 import com.wanted.wantedpreonboardingbackend.user.domain.User;
@@ -15,7 +15,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenManager jwtTokenManager;
 
     @Transactional
     public Long join(Email email, Password password) {
@@ -34,7 +34,7 @@ public class UserService {
         User user = getUserOrException(email);
         validateCorrectPassword(password.getPassword(), user.getPassword().getPassword());
 
-        return jwtTokenProvider.createToken(email.getAddress());
+        return jwtTokenManager.createToken(email.getAddress());
     }
 
     private void validateDuplicateEmail(Email email) {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class JwtTokenProvider {
+public class JwtTokenManager {
 
     private static final String KEY = "JWT_TOKEN_SECRET_KEY_JWT_TOKEN_SECRET_KEY";
     private static final Long EXPIRED_TIME = 300000L;

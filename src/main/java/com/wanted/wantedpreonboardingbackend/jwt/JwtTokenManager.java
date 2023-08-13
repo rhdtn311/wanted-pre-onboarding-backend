@@ -1,5 +1,8 @@
 package com.wanted.wantedpreonboardingbackend.jwt;
 
+import com.wanted.wantedpreonboardingbackend.user.domain.Email;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
@@ -21,6 +24,26 @@ public class JwtTokenManager {
                 .setExpiration(expiredDate)
                 .signWith(Keys.hmacShaKeyFor(KEY.getBytes()))
                 .compact();
+    }
+
+    public Email getUserEmailFromToken(String token) {
+        try {
+            Claims claims = extractBody(token);
+            String emailAddress = (String) claims.get("email");
+            return new Email(emailAddress);
+        } catch (ExpiredJwtException e) {
+            throw new IllegalArgumentException("만료된 토큰입니다.");
+        } catch (Exception e) {
+            throw new IllegalArgumentException("사용자 인증에 실패했습니다.");
+        }
+    }
+
+    private Claims extractBody(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(KEY.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     private Date getExpiredDate() {

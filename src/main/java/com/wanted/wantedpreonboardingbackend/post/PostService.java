@@ -1,12 +1,16 @@
 package com.wanted.wantedpreonboardingbackend.post;
 
 import com.wanted.wantedpreonboardingbackend.post.domain.Post;
+import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostsResponse;
 import com.wanted.wantedpreonboardingbackend.user.UserRepository;
 import com.wanted.wantedpreonboardingbackend.user.domain.Email;
 import com.wanted.wantedpreonboardingbackend.user.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -22,6 +26,13 @@ public class PostService {
         postRepository.save(post);
 
         return post.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public PostsResponse getPosts(Pageable pageable) {
+        List<Post> posts = postRepository.findPostsFetchWithUser(pageable);
+
+        return PostsResponse.of(posts);
     }
 
     private User getUserOrException(Email email) {

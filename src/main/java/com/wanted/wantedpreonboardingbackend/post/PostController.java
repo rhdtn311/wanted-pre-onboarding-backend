@@ -2,13 +2,12 @@ package com.wanted.wantedpreonboardingbackend.post;
 
 import com.wanted.wantedpreonboardingbackend.common.LoginCheck;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostCreateRequest;
+import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostsResponse;
 import com.wanted.wantedpreonboardingbackend.user.domain.Email;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -29,5 +28,12 @@ public class PostController {
         return ResponseEntity.created(
                 URI.create("/posts/" + postId)
         ).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<PostsResponse> getPosts(Pageable pageable) {
+        PostsResponse postsResponse = postService.getPosts(pageable);
+
+        return ResponseEntity.ok(postsResponse);
     }
 }

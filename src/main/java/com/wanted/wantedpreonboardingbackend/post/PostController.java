@@ -2,6 +2,7 @@ package com.wanted.wantedpreonboardingbackend.post;
 
 import com.wanted.wantedpreonboardingbackend.common.LoginCheck;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostCreateRequest;
+import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostResponse;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostsResponse;
 import com.wanted.wantedpreonboardingbackend.user.domain.Email;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,12 @@ public class PostController {
         PostsResponse postsResponse = postService.getPosts(pageable);
 
         return ResponseEntity.ok(postsResponse);
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostResponse> getPost(@PathVariable Long postId) {
+        PostResponse postResponse = postService.getPost(postId);
+
+        return ResponseEntity.ok(postResponse);
     }
 }

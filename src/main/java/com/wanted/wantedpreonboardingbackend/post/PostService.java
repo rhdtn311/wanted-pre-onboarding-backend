@@ -1,6 +1,7 @@
 package com.wanted.wantedpreonboardingbackend.post;
 
 import com.wanted.wantedpreonboardingbackend.post.domain.Post;
+import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostResponse;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostsResponse;
 import com.wanted.wantedpreonboardingbackend.user.UserRepository;
 import com.wanted.wantedpreonboardingbackend.user.domain.Email;
@@ -33,6 +34,14 @@ public class PostService {
         List<Post> posts = postRepository.findPostsFetchWithUser(pageable);
 
         return PostsResponse.of(posts);
+    }
+
+    @Transactional(readOnly = true)
+    public PostResponse getPost(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+
+        return PostResponse.of(post);
     }
 
     private User getUserOrException(Email email) {

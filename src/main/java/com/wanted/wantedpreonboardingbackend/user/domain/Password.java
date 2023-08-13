@@ -14,4 +14,8 @@ public class Password {
     @NotBlank
     @Column(name = "password", nullable = false)
     private String password;
+
+    public void changeEncryptedPassword(String encryptedPassword) {
+        this.password = encryptedPassword;
+    }
 }

@@ -21,4 +21,9 @@ public class User extends BaseEntity {
 
     @Embedded
     private Password password;
+
+    public User(Email email, Password password) {
+        this.email = email;
+        this.password = password;
+    }
 }

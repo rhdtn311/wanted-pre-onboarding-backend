@@ -1,4 +1,4 @@
-package com.wanted.wantedpreonboardingbackend.domain;
+package com.wanted.wantedpreonboardingbackend;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

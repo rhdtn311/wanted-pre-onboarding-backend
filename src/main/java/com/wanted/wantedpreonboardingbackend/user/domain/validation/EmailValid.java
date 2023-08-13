@@ -1,4 +1,4 @@
-package com.wanted.wantedpreonboardingbackend.domain.user.validation;
+package com.wanted.wantedpreonboardingbackend.user.domain.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

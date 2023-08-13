@@ -1,6 +1,6 @@
-package com.wanted.wantedpreonboardingbackend.domain.user;
+package com.wanted.wantedpreonboardingbackend.user.domain;
 
-import com.wanted.wantedpreonboardingbackend.domain.user.validation.PasswordValid;
+import com.wanted.wantedpreonboardingbackend.user.domain.validation.PasswordValid;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.wanted.wantedpreonboardingbackend.domain.user.validation;
+package com.wanted.wantedpreonboardingbackend.user.domain.validation;
 
-import com.wanted.wantedpreonboardingbackend.domain.user.Password;
+import com.wanted.wantedpreonboardingbackend.user.domain.Password;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;

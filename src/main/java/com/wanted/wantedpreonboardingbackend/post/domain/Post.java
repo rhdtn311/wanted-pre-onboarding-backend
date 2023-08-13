@@ -1,6 +1,7 @@
-package com.wanted.wantedpreonboardingbackend.user.domain;
+package com.wanted.wantedpreonboardingbackend.post.domain;
 
 import com.wanted.wantedpreonboardingbackend.BaseEntity;
+import com.wanted.wantedpreonboardingbackend.user.domain.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

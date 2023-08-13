@@ -56,4 +56,14 @@ public class PostController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Void> deletePost(
+            @PathVariable Long postId,
+            @LoginCheck Email email
+    ) {
+        postService.deletePost(email, postId);
+
+        return ResponseEntity.noContent().build();
+    }
 }

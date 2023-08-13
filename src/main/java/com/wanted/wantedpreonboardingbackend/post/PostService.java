@@ -52,6 +52,15 @@ public class PostService {
         post.update(title, content);
     }
 
+    @Transactional
+    public void deletePost(Email email, Long postId) {
+        Post post = getPostOrException(postId);
+        User user = getUserOrException(email);
+        validatePostAccessAuthority(post, user);
+
+        postRepository.delete(post);
+    }
+
     private User getUserOrException(Email email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));

@@ -5,11 +5,9 @@ import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostResponse;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostUpdateRequest;
 import com.wanted.wantedpreonboardingbackend.post.domain.dto.PostsResponse;
 import com.wanted.wantedpreonboardingbackend.user.UserRepository;
-import com.wanted.wantedpreonboardingbackend.user.UserService;
 import com.wanted.wantedpreonboardingbackend.user.domain.Email;
 import com.wanted.wantedpreonboardingbackend.user.domain.Password;
 import com.wanted.wantedpreonboardingbackend.user.domain.User;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Transactional
 @SpringBootTest
@@ -29,9 +27,6 @@ class PostServiceTest {
 
     @Autowired
     private PostService postService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;

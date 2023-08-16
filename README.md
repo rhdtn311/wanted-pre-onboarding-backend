@@ -90,6 +90,7 @@ HTTP 요청 URI에 다음과 같이 요청합니다.
 ![image](https://github.com/JionisGenius/wanted-pre-onboarding-backend/assets/68289543/89edefeb-0014-4907-a87f-370af3f07e5a)
 
 ## API 동작 영상 링크
+https://youtu.be/j_HsYZdXwM8
 
 ## 구현 방법 및 이유
 - 비밀번호 암호화 
